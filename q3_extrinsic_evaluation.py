@@ -48,7 +48,25 @@ RESULTS_DIR = os.path.join(OUTPUT_DIR, "results")
 os.makedirs(PLOTS_DIR, exist_ok=True)
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
-DEFAULT_CORPUS_PATH = "/home/genesis/Downloads/GPAC.txt"
+
+def resolve_corpus_path():
+    """Find the GPAC corpus across common local paths and repo-relative locations."""
+    repo_root = os.path.dirname(os.path.abspath(__file__))
+    candidates = [
+        os.path.join(repo_root, "GPAC.txt"),
+        os.path.join(repo_root, "data", "GPAC.txt"),
+        os.path.join(os.path.expanduser("~"), "DownloadsCorpus", "GPAC.txt"),
+        os.path.join(os.path.expanduser("~"), "Downloads", "GPAC.txt"),
+        "/home/genesis/Downloads/GPAC.txt",
+        "/home/yadeni/DownloadsCorpus/GPAC.txt",
+    ]
+    for candidate in candidates:
+        if os.path.isfile(candidate):
+            return candidate
+    return candidates[0]
+
+
+DEFAULT_CORPUS_PATH = resolve_corpus_path()
 
 
 class BackoffPredictor:

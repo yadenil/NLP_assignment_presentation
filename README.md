@@ -40,7 +40,7 @@ This repository contains the complete, production-grade implementation for all f
 
 ## 📁 Repository Structure
 ```tree
-NLP assignment/
+NLP_assignment_presentation/
 ├── amharic_preprocessor.py      # Preprocessing, normalization, tokenization, abbreviation handling, stopword filter
 ├── ngram_model.py              # Flexible N-gram LM class with MLE, Add-k, Laplace, Interpolation, & Sampling
 ├── q1_ngram_language_model.py  # Question 1: Corpus statistics, n-grams, top-10, word clouds, sentence probability
@@ -362,31 +362,41 @@ Once the environment and dependencies are ready, follow the commands in the [How
 
 ### 1. Run Master Pipeline (Questions 1 to 4 Sequentially)
 ```bash
-python3 "/home/genesis/NLP assignment/run_all.py"
+cd "/home/yadeni/Desktop/NLP_AssignmentP/NLP_assignment_presentation"
+python3 ./run_all.py
+```
+
+If the corpus is not in the default search locations, pass it explicitly:
+```bash
+python3 ./run_all.py --corpus "/path/to/GPAC.txt"
 ```
 
 ### 2. Run Individual Questions
 ```bash
+cd "/home/yadeni/Desktop/NLP_AssignmentP/NLP_assignment_presentation"
+
 # Question 1: N-gram Modeling, Statistics, Wordclouds, Probabilities
-python3 "/home/genesis/NLP assignment/q1_ngram_language_model.py" --sentences 60000
+python3 ./q1_ngram_language_model.py --sentences 60000
 
 # Question 2: Intrinsic Evaluation (Perplexity)
-python3 "/home/genesis/NLP assignment/q2_intrinsic_evaluation.py" --sentences 60000
+python3 ./q2_intrinsic_evaluation.py --sentences 60000
 
 # Question 3: Extrinsic Evaluation (Next-Word Downstream Benchmark)
-python3 "/home/genesis/NLP assignment/q3_extrinsic_evaluation.py" --sentences 60000
+python3 ./q3_extrinsic_evaluation.py --sentences 60000
 
 # Question 4: Predictive System Verification
-python3 "/home/genesis/NLP assignment/q4_predictive_system.py"
+python3 ./q4_predictive_system.py
 
 # Question 4: Interactive CLI Mode
-python3 "/home/genesis/NLP assignment/q4_predictive_system.py" --interactive
+python3 ./q4_predictive_system.py --interactive
 ```
+
+If your GPAC.txt lives elsewhere, add `--corpus "/path/to/GPAC.txt"` to any of the commands above.
 
 ### 3. Launch Interactive Streamlit Web App
 ```bash
-streamlit run "/home/genesis/NLP assignment/app_streamlit.py"
-
+cd "/home/yadeni/Desktop/NLP_AssignmentP/NLP_assignment_presentation"
+streamlit run app_streamlit.py
 ```
 
 ## Project Note

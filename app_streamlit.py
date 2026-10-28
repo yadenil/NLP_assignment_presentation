@@ -4,8 +4,8 @@ Interactive Streamlit Web Application: Amharic Predictive Text System
 Addis Ababa University | College of Technology & Built Environment
 Course: Natural Language Processing (NLP) - Assignment 1 (Task #4)
 
-Run locally using:
-  streamlit run "NLP assignment/app_streamlit.py"
+Run locally from the project root using:
+  streamlit run "app_streamlit.py"
 """
 
 import os
@@ -19,7 +19,7 @@ from q4_predictive_system import AmharicPredictiveSystem
 from amharic_preprocessor import tokenize_amharic_sentence
 
 st.set_page_config(
-    page_title="Amharic Predictive Text & Next-Word Suggestion",
+    page_title="Amharic Next-Word Prediction System",
     page_icon="🇪🇹",
     layout="wide"
 )
@@ -81,9 +81,6 @@ def load_example(example_text: str):
 # Sidebar controls
 with st.sidebar:
     st.image("https://upload.wikimedia.org/wikipedia/commons/7/71/Flag_of_Ethiopia.svg", width=80)
-    st.header("⚙️ Model Configuration")
-    st.info("Course: NLP Assignment 1\nInstructor: Dr. Fantahun B.\nCorpus: GPAC (General-Purpose Amharic Corpus)")
-    
     top_k = st.slider("Suggestions Count (Top-k)", min_value=3, max_value=8, value=5)
     smoothing_alpha = st.slider("Smoothing Alpha (k)", min_value=0.01, max_value=1.0, value=0.1, step=0.01)
     
@@ -105,7 +102,7 @@ with st.sidebar:
             use_container_width=True
         )
 
-st.markdown('<div class="main-title">🇪🇹 Amharic Predictive Text & Next-Word Suggestion System</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">🇪🇹 Amharic Next-Word Prediction System</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Addis Ababa University | College of Technology & Built Environment | NLP Task #4</div>', unsafe_allow_html=True)
 
 # Main layout

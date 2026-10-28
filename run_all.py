@@ -27,7 +27,25 @@ from q2_intrinsic_evaluation import run_question_2
 from q3_extrinsic_evaluation import run_question_3
 from q4_predictive_system import run_question_4_verification
 
-DEFAULT_CORPUS_PATH = "/home/genesis/Downloads/GPAC.txt"
+
+def resolve_corpus_path():
+    """Find the GPAC corpus in common locations without assuming a personal home directory."""
+    repo_root = os.path.dirname(os.path.abspath(__file__))
+    candidates = [
+        os.path.join(repo_root, "GPAC.txt"),
+        os.path.join(repo_root, "data", "GPAC.txt"),
+        os.path.join(os.path.expanduser("~"), "DownloadsCorpus", "GPAC.txt"),
+        os.path.join(os.path.expanduser("~"), "Downloads", "GPAC.txt"),
+        "/home/genesis/Downloads/GPAC.txt",
+        "/home/yadeni/DownloadsCorpus/GPAC.txt",
+    ]
+    for candidate in candidates:
+        if os.path.isfile(candidate):
+            return candidate
+    return candidates[0]
+
+
+DEFAULT_CORPUS_PATH = resolve_corpus_path()
 
 
 def main():

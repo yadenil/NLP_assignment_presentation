@@ -37,7 +37,26 @@ MODELS_DIR = os.path.join(BASE_DIR, "models")
 os.makedirs(MODELS_DIR, exist_ok=True)
 
 CACHE_PATH = os.path.join(MODELS_DIR, "ngram_cache.pkl")
-DEFAULT_CORPUS_PATH = "/home/genesis/Downloads/GPAC.txt"
+
+
+def resolve_corpus_path():
+    """Find the GPAC corpus across common local paths and repo-relative locations."""
+    repo_root = os.path.dirname(os.path.abspath(__file__))
+    candidates = [
+        os.path.join(repo_root, "GPAC.txt"),
+        os.path.join(repo_root, "data", "GPAC.txt"),
+        os.path.join(os.path.expanduser("~"), "DownloadsCorpus", "GPAC.txt"),
+        os.path.join(os.path.expanduser("~"), "Downloads", "GPAC.txt"),
+        "/home/genesis/Downloads/GPAC.txt",
+        "/home/yadeni/DownloadsCorpus/GPAC.txt",
+    ]
+    for candidate in candidates:
+        if os.path.isfile(candidate):
+            return candidate
+    return candidates[0]
+
+
+DEFAULT_CORPUS_PATH = resolve_corpus_path()
 
 
 class AmharicPredictiveSystem:
